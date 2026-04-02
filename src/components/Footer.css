@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.footer {
+  background: radial-gradient(circle at top, #2e2e33 0%, #141416 45%, #050507 100%);
+  color: white;
+  padding: 72px 20px 24px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* SLOGAN / HERO AREA */
+.footer-hero {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.footer-hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  background: linear-gradient(90deg, #ff6b9d, #ffc371);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-hero-subtitle {
+  font-size: 14px;
+  color: #d1d5db;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* MAIN GRID */
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  margin-bottom: 36px;
+}
+
+.footer-section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.footer-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 15px;
+  color: #ff6b9d;
+}
+
+.footer-section p {
+  color: #9ca3af;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.footer-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: #e5e7eb;
+}
+
+.footer-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 15px;
+  color: #f9fafb;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #ff6b9d;
+  padding-left: 5px;
+}
+
+/* SOCIAL */
+.social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.social-btn:hover {
+  background: #ff6b9d;
+  transform: translateY(-3px);
+  box-shadow: 0 0 14px #ff6b9d; /* glow */
+}
+
+/* NEWSLETTER */
+.subscribe-text {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.newsletter {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+}
+
+.newsletter input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.newsletter input:focus {
+  outline: 2px solid #ff6b9d;
+}
+
+.newsletter button {
+  padding: 9px 16px;
+  background: linear-gradient(135deg, #ff6b9d, #ffa4c4);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.newsletter button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* PAYMENT ICONS */
+.payment-icons {
+  margin-top: 18px;
+}
+
+.payment-icons span {
+  display: block;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.payment-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e5e7eb;
+  font-size: 20px;
+}
+
+/* BOTTOM LINE */
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* ANIMATION */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .footer {
+    padding: 48px 18px 18px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-hero-title {
+    font-size: 24px;
+  }
+
+  .newsletter {
+    flex-direction: column;
+  }
+
+  .newsletter button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: flex-start;
+  }
+}

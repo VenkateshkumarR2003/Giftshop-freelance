@@ -1,0 +1,81 @@
+/* src/components/FloatingSocial.css */
+
+.floating-social {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 1500;
+}
+
+/* BASE BUTTON STYLE */
+.floating-icon {
+  width: 54px;             /* bigger size */
+  height: 54px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  /* 3D base shadow */
+ 
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    filter 0.15s ease-out;
+}
+
+/* WhatsApp original color */
+.floating-icon.whatsapp {
+  background: #25d366;
+}
+
+/* Instagram gradient */
+.floating-icon.instagram {
+  background: radial-gradient(circle at 30% 30%, #fdf497 0, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+
+/* icon size */
+.floating-icon svg {
+  font-size: 26px;
+}
+
+/* HOVER: lift slightly, stronger soft shadow */
+.floating-icon:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 6px 0 rgba(0, 0, 0, 0.22),
+    0 22px 36px rgba(15, 23, 42, 0.55);
+  filter: brightness(1.08);
+}
+
+/* ACTIVE (click): pressed 3D effect */
+.floating-icon:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.3),
+    0 12px 20px rgba(15, 23, 42, 0.4);
+  filter: brightness(0.97);
+}
+
+/* Slightly smaller on mobile */
+@media (max-width: 768px) {
+  .floating-social {
+    left: 16px;
+    bottom: 18px;
+    gap: 10px;
+  }
+
+  .floating-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .floating-icon svg {
+    font-size: 24px;
+  }
+}

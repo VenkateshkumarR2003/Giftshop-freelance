@@ -170,12 +170,12 @@ function Hero({ onShopClick }) {
       <div className="hero-sticky-container">
         
         {/* Loader while images are fetching */}
-        {loadedFrames < FRAME_COUNT && (
+        {/* {loadedFrames < FRAME_COUNT && (
           <div className="hero-loader">
             <div className="loader-spinner"></div>
             <span>Loading Cinematic Layout {Math.round((loadedFrames / FRAME_COUNT) * 100)}%</span>
           </div>
-        )}
+        )} */}
 
         <canvas ref={canvasRef} className="hero-canvas" />
         <div className="hero-overlay" />

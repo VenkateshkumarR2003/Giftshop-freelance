@@ -2,7 +2,7 @@ import "./About.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTruck, faBoxOpen, faRotate } from "@fortawesome/free-solid-svg-icons";
 
-function About() {
+function About({ onShopClick }) {
   return (
     <section id="about" className="about">
       {/* background decorative shapes */}
@@ -80,16 +80,18 @@ function About() {
           </div>
 
           {/* CTA */}
-          <button className="about-btn">Shop Now</button>
+          <button className="about-btn" onClick={onShopClick}>Shop Now</button>
         </div>
 
         {/* Right image grid */}
         <div className="about-image">
           <div className="image-grid">
-            <img src="https://via.placeholder.com/400x300?text=Gifts+1" alt="Gift 1" />
-            <img src="https://via.placeholder.com/400x300?text=Gifts+2" alt="Gift 2" />
-            <img src="https://via.placeholder.com/400x300?text=Gifts+3" alt="Gift 3" />
-            <img src="https://via.placeholder.com/400x300?text=Gifts+4" alt="Gift 4" />
+            <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f" alt="Gift 1" />
+            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf" alt="Gift 2" />
+            <img src="https://images.unsplash.com/photo-1513883049090-d0b7439799bf" alt="Gift 3" />
+            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48" alt="Gift 4" />
+            <img src="https://images.unsplash.com/photo-1512909006721-3d6018887383" alt="Gift 3" />
+            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48" alt="Gift 4" />
           </div>
         </div>
       </div>

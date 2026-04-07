@@ -11,6 +11,7 @@ import CartPage from "./components/CartPage";
 import Wishlist from "./components/Wishlist";
 import Testimonials from "./components/Testimonials";
 import FloatingSocial from "./components/FloatingSocial";
+import Gallery from "./components/Gallery";
 
 import "./App.css";
 
@@ -108,7 +109,8 @@ function App() {
                 <section id="testimonials">
     <Testimonials />
   </section>
-                <About />
+                <About onShopClick={scrollToProducts} />
+                <Gallery />
                 <Footer />
               </>
             }

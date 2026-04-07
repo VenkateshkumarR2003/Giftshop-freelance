@@ -1,7 +1,7 @@
 // src/components/Testimonials.jsx
 import { useEffect, useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuoteLeft, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faQuoteLeft, faStar, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import "./Testimonials.css";
 
 const testimonialsData = [
@@ -10,32 +10,32 @@ const testimonialsData = [
     name: "Priya S.",
     location: "Chennai",
     rating: 5,
-    occasion: "Birthday 🎂",
-    text: "The birthday gift I ordered was absolutely perfect. Delivery was super fast and the packaging was beautiful!",
+    occasion: "Birthday",
+    text: "The birthday gift I ordered was absolutely perfect. Delivery was super fast and the packaging was beautiful! Highly recommend this to everyone.",
   },
   {
     id: 2,
     name: "Rahul M.",
     location: "Bengaluru",
     rating: 5,
-    occasion: "Anniversary 💞",
-    text: "My wife loved the anniversary box. It felt so personal and premium – way better than generic gifts.",
+    occasion: "Anniversary",
+    text: "My wife loved the anniversary box. It felt so personal and premium – way better than generic gifts. 10/10 experience.",
   },
   {
     id: 3,
     name: "Ananya K.",
     location: "Hyderabad",
     rating: 5,
-    occasion: "Surprise Gift 🎁",
-    text: "The surprise gift made my best friend cry happy tears. Loved the detailing and handwritten note!",
+    occasion: "Surprise Gift",
+    text: "The surprise gift made my best friend cry happy tears. Loved the detailing and handwritten note! Thank you guys.",
   },
   {
     id: 4,
     name: "Vikram R.",
     location: "Coimbatore",
     rating: 4.9,
-    occasion: "Wedding 💍",
-    text: "Elegant, classy, and right on time for the wedding. Everyone asked where I ordered it from.",
+    occasion: "Wedding",
+    text: "Elegant, classy, and right on time for the wedding. Everyone asked where I ordered it from. Very impressive.",
   },
 ];
 
@@ -43,6 +43,10 @@ function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hovering, setHovering] = useState(false);
   const intervalRef = useRef(null);
+  
+  // Swipe support
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
   const total = testimonialsData.length;
 
@@ -58,7 +62,6 @@ function Testimonials() {
     setActiveIndex(index);
   };
 
-  // ✅ FIXED auto-slide (clean + stable)
   useEffect(() => {
     if (hovering) return;
 
@@ -69,14 +72,36 @@ function Testimonials() {
     return () => clearInterval(intervalRef.current);
   }, [hovering, total]);
 
+  // Handle Swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEndHandler = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
   return (
     <section id="testimonials" className="testimonials-section">
       <div className="testimonials-header">
-        <span className="trust-pill">⭐ 4.9/5 · 10,000+ Happy Customers</span>
+        <span className="trust-pill"><FontAwesomeIcon icon={faStar} className="pill-icon" /> 4.9/5 · 10,000+ Happy Customers</span>
         <h2>What our customers say</h2>
         <p>
-          Real stories from people who turned simple moments into unforgettable
-          memories with our curated gifts.
+          Real stories from people who turned simple moments into unforgettable memories with our curated gifts.
         </p>
       </div>
 
@@ -84,6 +109,9 @@ function Testimonials() {
         className="testimonials-slider"
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEndHandler}
       >
         <div
           className="testimonials-track"
@@ -94,42 +122,37 @@ function Testimonials() {
           {testimonialsData.map((t, index) => (
             <div
               key={t.id}
-              className={`testimonial-card ${
-                index === activeIndex ? "active" : ""
-              }`}
+              className="testimonial-card-container"
             >
-              <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
+              <div className={`testimonial-card ${index === activeIndex ? "active" : "inactive"}`}>
+                <FontAwesomeIcon icon={faQuoteLeft} className="quote-icon" />
 
-              {/* ⭐ Dynamic Stars */}
-              <div className="rating-row">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <FontAwesomeIcon
-                    key={i}
-                    icon={faStar}
-                    className={`star-icon ${
-                      i < Math.round(t.rating) ? "filled" : ""
-                    }`}
-                  />
-                ))}
-                <span className="rating-value">{t.rating}</span>
-              </div>
-
-              <p className="testimonial-text">“{t.text}”</p>
-
-              <div className="testimonial-footer">
-                <div className="avatar">
-                  {t.name.charAt(0)}
+                <div className="rating-row">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <FontAwesomeIcon
+                      key={i}
+                      icon={faStar}
+                      className={`star-icon ${i < Math.round(t.rating) ? "filled" : ""}`}
+                    />
+                  ))}
                 </div>
 
-                <div className="customer-meta">
-                  <span className="customer-name">{t.name}</span>
-                  <span className="customer-location">
-                    {t.location} ·{" "}
-                    <span className="occasion-tag">{t.occasion}</span>
-                  </span>
-                  <span className="verified-badge">
-                    ✔ Verified Purchase
-                  </span>
+                <p className="testimonial-text">
+                  "{t.text}"
+                </p>
+
+                <div className="testimonial-footer">
+                  <div className="avatar">{t.name.charAt(0)}</div>
+
+                  <div className="customer-meta">
+                    <span className="customer-name">{t.name}</span>
+                    <span className="customer-location">
+                      {t.location} · <span className="occasion-tag">{t.occasion}</span>
+                    </span>
+                    <span className="verified-badge">
+                      <FontAwesomeIcon icon={faCheckCircle} /> Verified Purchase
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -146,6 +169,7 @@ function Testimonials() {
                 key={index}
                 className={`dot ${index === activeIndex ? "active" : ""}`}
                 onClick={() => goTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
               />
             ))}
           </div>
